@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Product Sale",
+    "icon": "fas fa-regular fa-circle-plus",
+    "childrens": [
+      {
+        "title": "Add Sale",
+        "icon": "fas fa-regular fa-cart-arrow-down",
+        "path": "/sale-product"
+      },
+      {
+        "title": "All Records",
+        "icon": "fas fa-regular fa-list",
+        "path": "/all-sale-products"
+      },
+      {
+        "title": "Contact",
+        "icon": "fas fa-regular fa-circle-plus",
+        "childrens": [
+          {
+            "title": "Facebook",
+            "icon": "fas fa-regular fa-circle-plus"
+          },
+          {
+            "title": "Twitter",
+            "icon": "fas fa-regular fa-circle-plus"
+          },
+          {
+            "title": "Instagram",
+            "icon": "fas fa-home-alt"
+          }
+        ]
+      },
+      {
+        "title": "FAQ",
+        "icon": "fas fa-home-alt"
+      }
+    ]
+  },
+  {
+    "title": "Account",
+    "icon": "fas fa-regular fa-circle-plus",
+    "childrens": [
+      {
+        "title": "Login",
+        "path": "/login"
+      },
+      {
+        "title": "Register",
+        "path": "/register"
+      },
+      {
+        "title": "Forgot Password",
+        "path": "/forgot-password"
+      },
+      {
+        "title": "Reset Password",
+        "path": "/reset-password"
+      }
+    ]
+  }
+]

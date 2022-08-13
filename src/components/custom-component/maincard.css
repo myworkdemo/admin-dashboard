@@ -1,0 +1,65 @@
+.main-card {
+  /* padding: 5px; */
+  height: 100%;
+  width: 100%;
+  background-color: var(--white-color);
+  /* border: 1px solid var(--first-color); */
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.main-card-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #fff;
+  font-size: 25px;
+  padding-left: 15px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  height: 3.5rem;
+
+  /* ff 3.6+ */
+  background: -moz-linear-gradient(
+    87deg,
+    rgba(241, 0, 134, 1) 0%,
+    rgba(235, 44, 185, 1) 100%
+  );
+
+  /* safari 5.1+,chrome 10+ */
+  background: -webkit-linear-gradient(
+    87deg,
+    rgba(241, 0, 134, 1) 0%,
+    rgba(235, 44, 185, 1) 100%
+  );
+
+  /* opera 11.10+ */
+  background: -o-linear-gradient(
+    87deg,
+    rgba(241, 0, 134, 1) 0%,
+    rgba(235, 44, 185, 1) 100%
+  );
+
+  /* ie 6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EB2CB9', endColorstr='#F10086', GradientType=0 );
+
+  /* ie 10+ */
+  background: -ms-linear-gradient(
+    87deg,
+    rgba(241, 0, 134, 1) 0%,
+    rgba(235, 44, 185, 1) 100%
+  );
+
+  /* global 94%+ browsers support */
+  background: linear-gradient(
+    87deg,
+    rgba(241, 0, 134, 1) 0%,
+    rgba(235, 44, 185, 1) 100%
+  );
+}
+
+.main-card-body {
+  height: auto;
+  width: 100%;
+  padding: 15px;
+}
