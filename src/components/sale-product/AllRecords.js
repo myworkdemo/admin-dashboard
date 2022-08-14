@@ -1,8 +1,7 @@
 import React from "react";
 import MainCard from "../custom-component/MainCard";
 import PaperContainer from "../custom-component/PaperContainer";
-import DataTableComponent from "../custom-component/datatable/DataTableComponent";
-import DataTable2 from "../custom-component/datatable/DataTable2";
+import DataTable2 from "../custom-component/datatable/DataTable";
 
 const AllRecords = () => {
 

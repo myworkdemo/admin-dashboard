@@ -1,12 +1,23 @@
-import React, { useState, useEffect } from "react";
-import "./datatable2.css";
+import React, { useState, useEffect, useRef } from "react";
+import "./datatable.css";
 
 const DataTable2 = ({ deleteRecord }) => {
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const [pageSize, setPageSize] = useState(4);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageNumbers, setPageNumbers] = useState([]);
+
+  const scrollElement = useRef(null);
+
+  const scrollRight = (value) => {
+    scrollElement.current.scrollLeft += parseInt(value);
+  };
+
+  const scrollLeft = (value) => {
+    scrollElement.current.scrollLeft -= parseInt(value);
+  };
 
   const columns = [
     {
@@ -114,6 +125,61 @@ const DataTable2 = ({ deleteRecord }) => {
       id: 14,
       title: "Ram",
       year: "1984"
+    },
+    {
+      id: 15,
+      title: "Ram",
+      year: "1984"
+    },
+    {
+      id: 11,
+      title: "Ghostbusters",
+      year: "1984"
+    },
+    {
+      id: 12,
+      title: "Ram",
+      year: "1984"
+    },
+    {
+      id: 13,
+      title: "Ram",
+      year: "1984"
+    },
+    {
+      id: 14,
+      title: "Ram",
+      year: "1984"
+    },
+    {
+      id: 15,
+      title: "Ram",
+      year: "1984"
+    },
+    {
+      id: 11,
+      title: "Ghostbusters",
+      year: "1984"
+    },
+    {
+      id: 12,
+      title: "Ram",
+      year: "1984"
+    },
+    {
+      id: 13,
+      title: "Ram",
+      year: "1984"
+    },
+    {
+      id: 14,
+      title: "Ram",
+      year: "1984"
+    },
+    {
+      id: 15,
+      title: "Ram",
+      year: "1984"
     }
   ];
 
@@ -132,6 +198,7 @@ const DataTable2 = ({ deleteRecord }) => {
     
     const pageCount = filtered ? Math.ceil(filtered.length / pageSize) : 0;
     console.log("pageCount : ", pageCount);
+    setTotalPages(pageCount);
     let pageNoArray = [];
     for (let i = 1; i <= pageCount; i++) {
       pageNoArray.push(i);
@@ -252,19 +319,36 @@ const DataTable2 = ({ deleteRecord }) => {
       </div>
 
       <nav className="pagination-container">
+      <button className="pagination-btn" onClick={()=>{scrollLeft(250); pagination(1)}}>First Page</button>
+      <button className={`btn-scroll tooltip ${(totalPages < 7 || currentPage === 1) ? 'disabled' : ''}`} onClick={()=>{scrollLeft(35); pagination(currentPage-1)}}>
+      <i class="fa-solid fa-angles-left"></i>
+      <span class="tooltiptext">Previous</span>
+      </button>
+        <div className="scroll-menu-container">
+       
+        <div className="scroll-menu" ref={scrollElement}>
+         
         <ul className="pagination">
           {
               pageNumbers.map((pageNo, index) => (
             <li
               className={
-                pageNo === currentPage ? "page-item active" : "page-item"
+                `${pageNo === currentPage ? "page-item active" : "page-item"}`
               }
               onClick={() => pagination(pageNo)}
             >
               <p className="page-link">{pageNo}</p>
             </li>
           ))}
+          
         </ul>
+        </div>
+        </div>
+        <button className={`btn-scroll tooltip ${totalPages < 7 ? 'disabled' : ''}`} onClick={()=>{scrollRight(35); pagination(currentPage+1)}}>
+        <i class="fa-solid fa-angles-right"></i>
+        <span class="tooltiptext">Next</span>
+        </button>
+        <button className="pagination-btn" onClick={()=>{scrollRight(250); pagination(totalPages)}}>Last Page</button>
       </nav>
     </div>
   );
