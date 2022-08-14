@@ -118,7 +118,7 @@ tr:nth-child(even) {
   min-width: 35px;
   padding: 5px;
   border-radius: 2px;
-  border: 1px solid red;
+  border: 1px solid var(--first-color);
   cursor: pointer;
 }
 
@@ -157,12 +157,12 @@ tr:nth-child(even) {
   display: flex;
   align-items: center;
   margin: 0 10px 0 10px;
-  border: 1px solid red;
+  border: 1px solid var(--first-color);
   padding: 5px;
   border-radius: 2px;
   cursor: pointer;
   color: var(--white-color);
-  background-color: var(--first-color-alt);
+  background-color: var(--first-color);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
 
