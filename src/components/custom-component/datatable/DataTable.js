@@ -9,13 +9,15 @@ const DataTable2 = ({ deleteRecord }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageNumbers, setPageNumbers] = useState([]);
 
+  const [rowsPerPagesList, setRowsPerPagesList] = useState([10, 20, 50, 100]);
+
   const scrollElement = useRef(null);
 
-  const scrollRight = (value) => {
+  const scrollRight = value => {
     scrollElement.current.scrollLeft += parseInt(value);
   };
 
-  const scrollLeft = (value) => {
+  const scrollLeft = value => {
     scrollElement.current.scrollLeft -= parseInt(value);
   };
 
@@ -195,7 +197,6 @@ const DataTable2 = ({ deleteRecord }) => {
   }, [search]);
 
   const getPageNo = filtered => {
-    
     const pageCount = filtered ? Math.ceil(filtered.length / pageSize) : 0;
     console.log("pageCount : ", pageCount);
     setTotalPages(pageCount);
@@ -204,7 +205,6 @@ const DataTable2 = ({ deleteRecord }) => {
       pageNoArray.push(i);
     }
     setPageNumbers(pageNoArray);
-   
   };
 
   const filterDataHandler = search => {
@@ -219,7 +219,6 @@ const DataTable2 = ({ deleteRecord }) => {
   };
 
   const pagination = pageNo => {
-   
     const filtered = filterDataHandler(search);
 
     const startIndex = (pageNo - 1) * parseInt(pageSize);
@@ -230,12 +229,12 @@ const DataTable2 = ({ deleteRecord }) => {
     getPageNo(filtered);
     setCurrentPage(pageNo);
 
-    if(list.length === 0){
-        const pageCount = Math.ceil(filtered.length / pageSize);
+    if (list.length === 0) {
+      const pageCount = Math.ceil(filtered.length / pageSize);
       pagination(pageCount);
       console.log("##pagination() calling...");
     }
-    
+
     // console.log("##list.length: ", list.length, ', filteredData.length: ',filteredData.length);
   };
 
@@ -244,6 +243,14 @@ const DataTable2 = ({ deleteRecord }) => {
     // const list2 = (search)? filteredData : data;
     // getPageNo(list2);
   }, [pageSize]);
+
+  const rowsPerPagesDropdown = () => {
+    console.log("rowsPerPagesList: ", rowsPerPagesList.length);
+    return rowsPerPagesList.map((value, index) => {
+      console.log("value: ", value);
+      <option value={value}>{value}</option>;
+    });
+  };
 
   return (
     <div className="table-container">
@@ -256,10 +263,9 @@ const DataTable2 = ({ deleteRecord }) => {
             className="rows-per-page"
             onChange={e => setPageSize(e.target.value)}
           >
-            <option value="2">2</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
+            {rowsPerPagesList.map(value => (
+              <option value={value}>{value}</option>
+            ))}
           </select>
         </div>
         <div class="grid-item">
@@ -289,23 +295,15 @@ const DataTable2 = ({ deleteRecord }) => {
                   <td>
                     {col.field === "action" ? (
                       <div className="table-btn-container">
-                        <button
-                          type="button"
-                          className="btn btn-icon btn-info tooltip"
-                         
+                        <i
+                          class="fa-solid fa-pen-to-square btn-edit"
                           onClick={() => console.log("ROW : " + row["id"])}
-                        >
-                          <i class="fa-solid fa-pen-to-square"></i>
-                          <span class="tooltiptext">Edit</span>
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-icon btn-dengar tooltip"
+                        ></i>
+
+                        <i
+                          class="fa-solid fa-trash-can btn-delete"
                           onClick={() => deleteRecord(row["id"])}
-                        >
-                          <i class="fa-solid fa-trash-can"></i>
-                          <span class="tooltiptext">Delete</span>
-                        </button>
+                        ></i>
                       </div>
                     ) : (
                       row[col.field]
@@ -319,36 +317,62 @@ const DataTable2 = ({ deleteRecord }) => {
       </div>
 
       <nav className="pagination-container">
-      <button className="pagination-btn" onClick={()=>{scrollLeft(250); pagination(1)}}>First Page</button>
-      <button className={`btn-scroll tooltip ${(totalPages < 7 || currentPage === 1) ? 'disabled' : ''}`} onClick={()=>{scrollLeft(35); pagination(currentPage-1)}}>
-      <i class="fa-solid fa-angles-left"></i>
-      <span class="tooltiptext">Previous</span>
-      </button>
-        <div className="scroll-menu-container">
-       
-        <div className="scroll-menu" ref={scrollElement}>
-         
-        <ul className="pagination">
-          {
-              pageNumbers.map((pageNo, index) => (
-            <li
-              className={
-                `${pageNo === currentPage ? "page-item active" : "page-item"}`
-              }
-              onClick={() => pagination(pageNo)}
-            >
-              <p className="page-link">{pageNo}</p>
-            </li>
-          ))}
-          
-        </ul>
-        </div>
-        </div>
-        <button className={`btn-scroll tooltip ${totalPages < 7 ? 'disabled' : ''}`} onClick={()=>{scrollRight(35); pagination(currentPage+1)}}>
-        <i class="fa-solid fa-angles-right"></i>
-        <span class="tooltiptext">Next</span>
+        <button
+          className="pagination-btn"
+          onClick={() => {
+            scrollLeft(250);
+            pagination(1);
+          }}
+        >
+          First Page
         </button>
-        <button className="pagination-btn" onClick={()=>{scrollRight(250); pagination(totalPages)}}>Last Page</button>
+        <button
+          className={`btn-scroll tooltip ${
+            totalPages < 7 || currentPage === 1 ? "disabled" : ""
+          }`}
+          onClick={() => {
+            scrollLeft(35);
+            pagination(currentPage - 1);
+          }}
+        >
+          <i class="fa-solid fa-angles-left"></i>
+          <span class="tooltiptext">Previous</span>
+        </button>
+        <div className="scroll-menu-container">
+          <div className="scroll-menu" ref={scrollElement}>
+            <ul className="pagination">
+              {pageNumbers.map((pageNo, index) => (
+                <li
+                  className={`${
+                    pageNo === currentPage ? "page-item active" : "page-item"
+                  }`}
+                  onClick={() => pagination(pageNo)}
+                >
+                  <p className="page-link">{pageNo}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <button
+          className={`btn-scroll tooltip ${totalPages < 7 ? "disabled" : ""}`}
+          onClick={() => {
+            scrollRight(35);
+            pagination(currentPage + 1);
+          }}
+        >
+          <i class="fa-solid fa-angles-right"></i>
+          <span class="tooltiptext">Next</span>
+        </button>
+        <button
+          className="pagination-btn"
+          onClick={() => {
+            scrollRight(250);
+            pagination(totalPages);
+          }}
+        >
+          Last Page
+        </button>
       </nav>
     </div>
   );

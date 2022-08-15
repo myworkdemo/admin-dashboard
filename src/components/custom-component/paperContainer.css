@@ -21,6 +21,12 @@
   border-bottom: 1px solid red;
 }
 
-.hide-title{
-  display: none
+.hide-title {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .paper {
+    height: 190vh;
+  }
 }

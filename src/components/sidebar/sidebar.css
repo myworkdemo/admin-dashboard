@@ -319,6 +319,14 @@ hr.solid {
 @media screen and (max-width: 768px) {
   main {
     padding: 0;
+    height: 220vh;
+  }
+  .main-conatiner{
+    height: 210vh;
+  }
+
+  .child-container{
+    height: 210vh;
   }
 
   .header {
